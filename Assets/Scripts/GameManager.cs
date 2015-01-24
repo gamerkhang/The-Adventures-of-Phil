@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	public bool gameRunning = true;
+	public static bool gameRunning = true;
 	GameObject pauseMenu;
 
 	// Use this for initialization

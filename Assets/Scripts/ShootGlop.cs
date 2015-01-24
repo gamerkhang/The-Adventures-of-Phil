@@ -6,7 +6,7 @@ public class ShootGlop : MonoBehaviour {
 
     public GameObject glop;
     public float glopSpeed = 5f;
-    List<GameObject> glopList;
+    public static List<GameObject> glopList;
     float yMax = 7.5f;
 
 	// Use this for initialization
@@ -17,8 +17,11 @@ public class ShootGlop : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Fire1"))
-            FireGlop();
+        if (GameManager.gameRunning)
+        {
+            if (Input.GetButtonDown("Fire1"))
+                FireGlop();
+        }
 	}
 
     void FireGlop()
