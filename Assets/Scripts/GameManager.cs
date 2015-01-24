@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-    public int something;
+
 	// Use this for initialization
 	void Start () {
 	
