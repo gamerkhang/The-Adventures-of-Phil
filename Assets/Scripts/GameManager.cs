@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-	public static bool gameRunning = true;
-	public static bool gameOver = false;
+	public static bool gameRunning;
+	public static bool gameOver;
 	public static string minutes, seconds;
 	public static int lives;
-	float currentTime, prevTime, startTime;
+	public static float currentTime, prevTime, startTime;
 	GameObject pauseMenu, gameOverMenu;
 
 	// Use this for initialization
@@ -16,14 +16,20 @@ public class GameManager : MonoBehaviour {
 		gameOverMenu = GameObject.FindGameObjectWithTag("GameOverMenu");
 		pauseMenu.SetActive(false);
 		gameOverMenu.SetActive(false);
+        gameRunning = true;
+        gameOver = false;
+        ApplicationModel.score = 0;
 		startTime = Time.time;
 		currentTime = startTime;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		prevTime = currentTime;
-		currentTime = Time.time;
+        if (!gameOver)
+        {
+            prevTime = currentTime;
+            currentTime = Time.time;
+        }
 		ApplicationModel.score += (int)((currentTime - prevTime) * 100);
 		if (Input.GetButtonDown("Pause"))
 			Pause();
