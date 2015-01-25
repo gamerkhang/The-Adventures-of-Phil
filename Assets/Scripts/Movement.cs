@@ -6,7 +6,6 @@ public class Movement : MonoBehaviour {
     Vector3 mousePos;
     Vector3 rotation;
     public float speed = 6f;
-    public float rotateSpeed = 5f;
     float zPos;
 	// Use this for initialization
 	void Start () {

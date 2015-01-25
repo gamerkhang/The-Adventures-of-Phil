@@ -13,6 +13,7 @@ public class TextIntroTransition : MonoBehaviour {
     public float transitionTime = 0.1f;
 	public float startDelay = 1f;
     public string nextLevel;
+    public AudioClip PhilTalk;
 	int currentCase;
 	int currentCharIndex;
 
@@ -72,7 +73,8 @@ public class TextIntroTransition : MonoBehaviour {
 					{
 						currentCase += 1;
 						currentCharIndex = 0;
-						intro.text += "\n\n\n\n";
+						intro.text += "\n\n\n";
+                        audio.PlayOneShot(PhilTalk);
 						UpdateNextTime(transitionTime * 5);
 					}
 					UpdateNextTime(transitionTime * 8);
