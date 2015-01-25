@@ -11,6 +11,7 @@ public class KillEnemy : MonoBehaviour
     {
         if (other.CompareTag("Projectile"))
         {
+			gameObject.rigidbody2D.gravityScale = 2f;
             audio.PlayOneShot(spitHit);
 			enemyAlive = false;
 			ApplicationModel.score += scoreIncrease;
