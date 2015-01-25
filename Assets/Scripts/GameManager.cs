@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour {
 	public static string minutes, seconds;
 	public static int lives;
 	public static float currentTime, prevTime, startTime;
+    public static bool beenHit = false;
+
 	GameObject pauseMenu, gameOverMenu;
 
     public float invincibleTime = 1f;
@@ -44,6 +46,11 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (beenHit)
+        {
+            GameManager.lives -= 1;
+            beenHit = false;
+        }
         if (prevLives > lives)
         {
             Debug.Log("Lives: " + lives);

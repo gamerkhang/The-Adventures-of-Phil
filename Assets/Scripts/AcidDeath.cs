@@ -18,11 +18,11 @@ public class AcidDeath : MonoBehaviour
         if(other.CompareTag("Acid"))
         {
             audio.PlayOneShot(splashSound);
-            GameObject temp = Instantiate(splash, new Vector2(splash.transform.position.x, -4.016f), splashRotation) as GameObject;
+            GameObject temp = Instantiate(splash, new Vector2(splash.transform.position.x, -4.122f), splashRotation) as GameObject;
             temp.SetActive(true);
-            Destroy(temp, 1f);
+            Destroy(temp, 0.5f);
             if (CompareTag("Player"))
-                GameManager.lives -= 1;
+                GameManager.beenHit = true;
             else
                 Destroy(gameObject);
         }
