@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class TextIntroTransition : MonoBehaviour {
-	AudioSource audio;
 	Text intro;
 	float nextTime;
 	string introText1 = "Today is not a very good day for Phil… and to make" +
@@ -11,7 +10,7 @@ public class TextIntroTransition : MonoBehaviour {
 	string introText2 = "Poor Phil";
 	string introText3 = ". . .";
 	string introText4 = "WHAT DO I DO NOW?!?!";
-	public float transitionTime;
+    public float transitionTime = 0.1f;
 	public float startDelay = 1f;
     public string nextLevel;
 	int currentCase;
@@ -19,10 +18,8 @@ public class TextIntroTransition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		audio = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
 		intro = GetComponent<Text>();
 		intro.text = "";
-		transitionTime = 0.1f;
 		currentCharIndex = 0;
 		nextTime = startDelay + transitionTime + Time.time;
 	}
@@ -37,7 +34,6 @@ public class TextIntroTransition : MonoBehaviour {
 				if (currentCharIndex != introText1.Length)
 				{
 					intro.text += introText1[currentCharIndex];
-					audio.Play();
 					currentCharIndex++;
 					if (currentCharIndex == introText1.Length)
 					{
@@ -57,7 +53,6 @@ public class TextIntroTransition : MonoBehaviour {
 				if (currentCharIndex != introText2.Length)
 				{
 					intro.text += introText2[currentCharIndex];
-					audio.Play();
 					currentCharIndex++;
 					if (currentCharIndex == introText2.Length)
 					{
@@ -72,14 +67,13 @@ public class TextIntroTransition : MonoBehaviour {
 				if (currentCharIndex != introText3.Length)
 				{
 					intro.text += introText3[currentCharIndex];
-					audio.Play();
 					currentCharIndex++;
 					if (currentCharIndex == introText3.Length)
 					{
 						currentCase += 1;
 						currentCharIndex = 0;
-						intro.text += "\n\n\n";
-						UpdateNextTime(transitionTime * 10);
+						intro.text += "\n\n\n\n";
+						UpdateNextTime(transitionTime * 5);
 					}
 					UpdateNextTime(transitionTime * 8);
 				}
@@ -88,19 +82,14 @@ public class TextIntroTransition : MonoBehaviour {
 				if (currentCharIndex != introText4.Length)
 				{
 					intro.text += introText4[currentCharIndex];
-					audio.Play();
 					currentCharIndex++;
 					if (currentCharIndex == introText4.Length)
 					{
 						currentCase += 1;
 						currentCharIndex = 0;
-<<<<<<< HEAD
 						UpdateNextTime(transitionTime * 30);
-=======
-						UpdateNextTime(transitionTime);
->>>>>>> origin/master
 					}
-					UpdateNextTime(transitionTime * 3);
+					UpdateNextTime(transitionTime * 2);
 				}
 				break;
 			case 5:
