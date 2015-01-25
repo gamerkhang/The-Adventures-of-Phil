@@ -10,8 +10,9 @@ public class TextIntroTransition : MonoBehaviour {
 	string introText2 = "Poor Phil";
 	string introText3 = ". . .";
 	string introText4 = "WHAT DO I DO NOW?!?!";
-	public float transitionTime;
+    public float transitionTime = 0.1f;
 	public float startDelay = 1f;
+    public string nextLevel;
 	int currentCase;
 	int currentCharIndex;
 
@@ -19,7 +20,6 @@ public class TextIntroTransition : MonoBehaviour {
 	void Start () {
 		intro = GetComponent<Text>();
 		intro.text = "";
-		transitionTime = 0.1f;
 		currentCharIndex = 0;
 		nextTime = startDelay + transitionTime + Time.time;
 	}
@@ -87,13 +87,13 @@ public class TextIntroTransition : MonoBehaviour {
 					{
 						currentCase += 1;
 						currentCharIndex = 0;
-						UpdateNextTime(transitionTime * 8);
+						UpdateNextTime(transitionTime * 30);
 					}
 					UpdateNextTime(transitionTime * 2);
 				}
 				break;
 			case 5:
-//				Application.LoadLevel ("");
+				Application.LoadLevel (nextLevel);
 				break;
 			}
 		}
