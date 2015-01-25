@@ -11,6 +11,9 @@ public class TextTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		timer.text = "POOR PHIL LIVED FOR\n" + GameManager.minutes + " minutes, " + GameManager.seconds + " seconds...";
+        timer.text = "POOR PHIL LIVED FOR\n";
+        if (GameManager.minutes != "00")
+            timer.text += GameManager.minutes + " minutes, ";
+        timer.text += GameManager.seconds + " seconds...";
 	}
 }

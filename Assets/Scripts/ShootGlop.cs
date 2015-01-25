@@ -8,6 +8,7 @@ public class ShootGlop : MonoBehaviour {
     public float glopSpeed = 5f;
     public static List<GameObject> glopList;
     float yMax = 7.5f;
+    public AudioClip spit;
 
 	// Use this for initialization
     void Start()
@@ -16,10 +17,14 @@ public class ShootGlop : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
+    float cooldown;
 	void Update () {
+
         if (GameManager.gameRunning)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (cooldown > 0)
+                cooldown -= Time.deltaTime;
+            else if (Input.GetButtonDown("Fire1"))
                 FireGlop();
         }
 	}
@@ -28,9 +33,12 @@ public class ShootGlop : MonoBehaviour {
     {
         if (glopList.Count <= 5)
         {
+            cooldown = 1f;
+
             GameObject temp = Instantiate(glop, transform.position, transform.rotation) as GameObject;
             temp.rigidbody2D.velocity = Vector3.up * glopSpeed;
             glopList.Add(temp);
+            audio.PlayOneShot(spit);
         }
     }
 }

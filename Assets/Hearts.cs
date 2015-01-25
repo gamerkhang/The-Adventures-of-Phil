@@ -4,6 +4,7 @@ using System.Collections;
 public class Hearts : MonoBehaviour {
     int prevLives;
     int heartsIndex;
+    public AudioClip rip;
 	// Use this for initialization
 	void Start () 
     {
@@ -18,6 +19,7 @@ public class Hearts : MonoBehaviour {
         {
             heartsIndex--;
             (transform.GetChild(heartsIndex)).gameObject.SetActive(false);
+            audio.PlayOneShot(rip);
         }
         prevLives = GameManager.lives;
 	}

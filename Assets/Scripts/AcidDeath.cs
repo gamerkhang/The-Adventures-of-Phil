@@ -6,6 +6,7 @@ public class AcidDeath : MonoBehaviour
 {
     public GameObject splash;
     public Quaternion splashRotation;
+    public AudioClip splashSound;
 
     void Start()
     {
@@ -16,7 +17,8 @@ public class AcidDeath : MonoBehaviour
     {
         if(other.CompareTag("Acid"))
         {
-            GameObject temp = Instantiate(splash,splash.transform.position,splashRotation) as GameObject; //, new Vector3(transform.position.x, transform.position.y, 0, transform.rotation
+            audio.PlayOneShot(splashSound);
+            GameObject temp = Instantiate(splash, new Vector2(splash.transform.position.x, -4.016f), splashRotation) as GameObject;
             temp.SetActive(true);
             Destroy(temp, 1f);
             if (CompareTag("Player"))

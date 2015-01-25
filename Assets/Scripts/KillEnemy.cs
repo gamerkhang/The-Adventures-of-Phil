@@ -3,12 +3,14 @@ using System.Collections;
 
 public class KillEnemy : MonoBehaviour
 {
+    public AudioClip spitHit;
     public int scoreIncrease;
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Projectile"))
         {
+            audio.PlayOneShot(spitHit);
             Destroy(gameObject);
             ApplicationModel.score += scoreIncrease;
         }
