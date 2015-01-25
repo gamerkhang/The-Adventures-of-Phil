@@ -18,10 +18,11 @@ public class AcidDeath : MonoBehaviour
         {
             GameObject temp = Instantiate(splash,splash.transform.position,splashRotation) as GameObject; //, new Vector3(transform.position.x, transform.position.y, 0, transform.rotation
             temp.SetActive(true);
-            if(CompareTag("Player"))
+            Destroy(temp, 1f);
+            if (CompareTag("Player"))
                 GameManager.lives -= 1;
-            Destroy(temp,1f);
-            Destroy(gameObject);
+            else
+                Destroy(gameObject);
         }
     }
 }

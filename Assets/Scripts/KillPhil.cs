@@ -8,7 +8,6 @@ public class KillPhil : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameManager.lives -= 1;
-            Destroy(other.gameObject);
         }
     }
 }
