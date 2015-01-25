@@ -13,6 +13,7 @@ public class KillEnemy : MonoBehaviour
             audio.PlayOneShot(spitHit);
             Destroy(gameObject);
             ApplicationModel.score += scoreIncrease;
+            audio.PlayOneShot(spitHit);
         }
     }
 }
