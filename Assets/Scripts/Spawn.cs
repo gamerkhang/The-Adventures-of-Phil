@@ -2,39 +2,44 @@
 using System.Collections;
 
 public class Spawn : MonoBehaviour {
-    public float enemyFlySpawnTime = 3f;
+	float symmrand(float v){return (Random.value-.5f)*v*2;}
+	float rand(float a,float b){return a+Random.value*(b-a);}
+	bool randchance(float c){return Random.value < c;}
+	int randsign(){return randchance(.5f) ? -1 : 1;}
+
     public float timeTilStart = 2f;
-    public GameObject enemyFly;
-    Vector2 ranForce;
-    public int numFlies = 10;
+
+    public GameObject[] Enemies;
+	public float[] SpawnChancePerSecond;
+
+    public int TotalEnemies = 10;
 
     GameObject nextLevel;
 
-
 	// Use this for initialization
-	void Start () {
-        StartCoroutine("SpawnFly");
+	float SpawnRateMultiplier = 1;
+	void Start(){
         nextLevel = GameObject.FindWithTag("NextLevel");
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update(){
+		if(TotalEnemies <= 0) return;
+		SpawnRateMultiplier *= Mathf.Pow(1.02f,Time.deltaTime);
+		for(int i = 0; i < Enemies.Length; i++){
+			if(randchance(SpawnChancePerSecond[i])){//Mathf.Pow(SpawnChancePerSecond[i],Time.deltaTime))){
+				SpawnEnemy(i);
+				break;
+			}
+		}
 	}
 
-    IEnumerator SpawnFly()
-    {
-        yield return new WaitForSeconds(timeTilStart);
-        for (int i = 0; i < numFlies; ++i )
-        {
-            ranForce.x = Random.Range(-300, 300);
-            ranForce.y = Random.Range(-10, -100);
-
-            GameObject temp = Instantiate(enemyFly) as GameObject;
-            temp.rigidbody2D.AddForce(ranForce);
-            yield return new WaitForSeconds(enemyFlySpawnTime);
-        }
-        GameManager.gameOver = true;
-        nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
-    }
+	void SpawnEnemy(int index){
+		GameObject obj = Instantiate(Enemies[index]) as GameObject;
+		obj.rigidbody2D.AddForce(new Vector2(symmrand(300),rand(-100,-10)));
+		if(--TotalEnemies <= 0){
+			GameManager.gameOver = true;
+			nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
+		}
+	}
 }
