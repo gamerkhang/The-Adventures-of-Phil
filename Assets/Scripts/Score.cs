@@ -23,7 +23,7 @@ public class Score : MonoBehaviour {
             PlayerPrefs.SetInt("HiScore", ApplicationModel.score);
     }
 
-    int GetScore() { return PlayerPrefs.GetInt("PointsValue"); }
+    public int GetScore() { return PlayerPrefs.GetInt("PointsValue"); }
 
-    int GetHiScore() { return PlayerPrefs.GetInt("HiScore"); }
+    public int GetHiScore() { return PlayerPrefs.GetInt("HiScore"); }
 }
