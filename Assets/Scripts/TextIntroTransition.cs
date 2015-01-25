@@ -14,11 +14,13 @@ public class TextIntroTransition : MonoBehaviour {
 	public float startDelay = 1f;
     public string nextLevel;
     public AudioClip PhilTalk;
+	GameObject textBox;
 	int currentCase;
 	int currentCharIndex;
 
 	// Use this for initialization
 	void Start () {
+		textBox = GameObject.Find("TextBox");
 		intro = GetComponent<Text>();
 		intro.text = "";
 		currentCharIndex = 0;
@@ -74,6 +76,7 @@ public class TextIntroTransition : MonoBehaviour {
 						currentCase += 1;
 						currentCharIndex = 0;
 						intro.text += "\n\n\n";
+						textBox.GetComponent<SpriteRenderer>().enabled = true;
                         audio.PlayOneShot(PhilTalk);
 						UpdateNextTime(transitionTime * 5);
 					}

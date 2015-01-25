@@ -21,9 +21,9 @@ public class Hearts : MonoBehaviour {
             if (heartsIndex >= 0)
             {
                 Transform heartAtIndex = transform.GetChild(heartsIndex);
-                heartAtIndex.gameObject.SetActive(false);
+				heartAtIndex.gameObject.SetActive(false);
+				audio.PlayOneShot(rip);
             }
-            audio.PlayOneShot(rip);
         }
         prevLives = GameManager.lives;
 	}

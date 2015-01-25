@@ -32,7 +32,9 @@ public class GameManager : MonoBehaviour {
 		startTime = Time.time;
         currentTime = startTime;
 
-        player = GameObject.FindWithTag("Player");
+		player = GameObject.FindWithTag("Player");
+		player.GetComponent<Movement>().enabled = true;
+		player.rigidbody2D.gravityScale = 0;
 
         foreach (Transform t in player.transform)
         {
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour {
             GameManager.lives -= 1;
             beenHit = false;
         }
-        if (prevLives > lives)
+        if (prevLives > lives && lives > 0)
         {
             Debug.Log("Lives: " + lives);
             StartCoroutine("Invincibility");
@@ -70,7 +72,8 @@ public class GameManager : MonoBehaviour {
 			Pause();
         else if (lives <= 0 && gameOver == false)
         {
-            Destroy(GameObject.FindWithTag("Player"));
+			player.GetComponent<Movement>().enabled = false;
+			player.rigidbody2D.gravityScale = 1;
             GameOver();
         }
 
