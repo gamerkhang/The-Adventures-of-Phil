@@ -15,7 +15,7 @@ public class IntroScene : MonoBehaviour {
 	void Start () {
 		player = GameObject.Find("Phil");
 //		tongue = GameObject.Find("Tongue");
-		tongueTemp.transform.LookAt (player.transform.position);
+//		tongueTemp.transform.LookAt (player.transform.position);
 	}
 	
 	// Update is called once per frame
@@ -47,7 +47,7 @@ public class IntroScene : MonoBehaviour {
 		if (other.gameObject != null && other.gameObject.CompareTag("Player"))
 		{
 			tongueTemp = Instantiate (tongue,new Vector3(0f,-58.9f,0f),tongue.transform.rotation) as GameObject;
-			//tongue.transform.rotation = Quaternion.Euler(0,0,GetAngle(tongue.transform.position, player.transform.position)+180);
+			tongue.transform.rotation = Quaternion.Euler(0,0,GetAngle(tongue.transform.position, player.transform.position)+180);
 			started = true;
 			player.GetComponent<Movement>().enabled = false;
 			player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

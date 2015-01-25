@@ -35,7 +35,7 @@ public class ShootGlop : MonoBehaviour {
         {
             cooldown = 1f;
 
-            GameObject temp = Instantiate(glop, transform.position, transform.rotation) as GameObject;
+            GameObject temp = Instantiate(glop, transform.position, glop.transform.rotation) as GameObject;
             temp.rigidbody2D.velocity = Vector3.up * glopSpeed;
             glopList.Add(temp);
             audio.PlayOneShot(spit);
