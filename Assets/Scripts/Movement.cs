@@ -15,9 +15,6 @@ public class Movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //float h = Input.GetAxis("Mouse X") * rotateSpeed;
-        //float z = Input.GetAxis("Mouse X") * rotateSpeed;
-        //transform.Rotate(0, 0, -z);
 	}
     void FixedUpdate()
     {
