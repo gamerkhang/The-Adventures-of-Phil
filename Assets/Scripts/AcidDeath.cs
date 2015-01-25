@@ -42,9 +42,9 @@ public class AcidDeath : MonoBehaviour
 			Destroy(temp, 0.5f);
 			if (CompareTag("Player"))
 			{
+				GameManager.beenHit = true;
 				if (GameManager.lives <= 0)
 					Destroy(gameObject);
-				GameManager.beenHit = true;
 			}
 			else
 				Destroy(gameObject);
