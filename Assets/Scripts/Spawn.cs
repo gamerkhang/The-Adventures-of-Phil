@@ -6,6 +6,7 @@ public class Spawn : MonoBehaviour {
     public float timeTilStart = 2f;
     public GameObject enemyFly;
     Vector2 ranForce;
+    public int numFlies = 10;
 
     GameObject nextLevel;
 
@@ -24,7 +25,7 @@ public class Spawn : MonoBehaviour {
     IEnumerator SpawnFly()
     {
         yield return new WaitForSeconds(timeTilStart);
-        for (int i = 0; i < 10; ++i )
+        for (int i = 0; i < numFlies; ++i )
         {
             ranForce.x = Random.Range(-300, 300);
             ranForce.y = Random.Range(-10, -100);
