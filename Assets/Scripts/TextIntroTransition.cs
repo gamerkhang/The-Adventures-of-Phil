@@ -12,6 +12,7 @@ public class TextIntroTransition : MonoBehaviour {
 	string introText4 = "WHAT DO I DO NOW?!?!";
 	public float transitionTime;
 	public float startDelay = 1f;
+    public string nextLevel;
 	int currentCase;
 	int currentCharIndex;
 
@@ -87,13 +88,13 @@ public class TextIntroTransition : MonoBehaviour {
 					{
 						currentCase += 1;
 						currentCharIndex = 0;
-						UpdateNextTime(transitionTime * 8);
+						UpdateNextTime(transitionTime * 30);
 					}
 					UpdateNextTime(transitionTime * 2);
 				}
 				break;
 			case 5:
-//				Application.LoadLevel ("");
+				Application.LoadLevel (nextLevel);
 				break;
 			}
 		}
