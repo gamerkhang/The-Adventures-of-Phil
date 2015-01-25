@@ -3,7 +3,6 @@ using System.Collections;
 
 public class IntroScene : MonoBehaviour {
 	public string nextLevel;
-	public float startDelay = 5.0f;
 	public GameObject tongue;
 	GameObject tongueTemp;
 	GameObject player;
@@ -11,6 +10,7 @@ public class IntroScene : MonoBehaviour {
     bool reachedPlayer = false;
 
 	public float tongueSpeed = 10f;
+    public float tongueSpawnY = 10f;
     Vector3 originalPos;
 
 	// Use this for initialization
@@ -23,7 +23,7 @@ public class IntroScene : MonoBehaviour {
 	{
 		if (other.gameObject != null && other.gameObject.CompareTag("Player"))
 		{
-            tongueTemp = Instantiate(tongue, new Vector2(other.transform.position.x,tongue.transform.position.y), tongue.transform.rotation) as GameObject;
+            tongueTemp = Instantiate(tongue, new Vector2(other.transform.position.x,other.transform.position.y - tongueSpawnY), tongue.transform.rotation) as GameObject;
 			player.GetComponent<Movement>().enabled = false;
 			player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             StartCoroutine("MoveTongue");

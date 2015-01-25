@@ -15,10 +15,14 @@ public class Hearts : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-	    if(prevLives>GameManager.lives)
+        if (prevLives > GameManager.lives) // && (!GameManager.gameOver && GameManager.gameRunning)
         {
             heartsIndex--;
-            (transform.GetChild(heartsIndex)).gameObject.SetActive(false);
+            if (heartsIndex >= 0)
+            {
+                Transform heartAtIndex = transform.GetChild(heartsIndex);
+                heartAtIndex.gameObject.SetActive(false);
+            }
             audio.PlayOneShot(rip);
         }
         prevLives = GameManager.lives;

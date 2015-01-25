@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour {
             else if (t.name == "PhilSprite")
                 playerSprite = t.gameObject;
         }
+
+        StartCoroutine("IncreaseScore");
 	}
 
 	
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour {
             prevTime = currentTime;
             currentTime = Time.time;
         }
-		ApplicationModel.score += (int)((currentTime - prevTime) * 100);
+//		ApplicationModel.score += (int)((currentTime - prevTime) * 10000 * Time.deltaTime);
 
 		if (Input.GetButtonDown("Pause"))
 			Pause();
@@ -74,6 +76,22 @@ public class GameManager : MonoBehaviour {
 
         prevLives = lives;
 	}
+
+    //void FixedUpdate()
+    //{
+
+    //    ApplicationModel.score += (int)((currentTime - prevTime) * 100);
+    //}
+
+    IEnumerator IncreaseScore()
+    {
+        yield return new WaitForSeconds(Spawn.timeTilStart);
+        while(!gameOver)
+        {
+            ApplicationModel.score += 50;
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 
 	public void Pause() {
 		Time.timeScale = 0;

@@ -7,7 +7,7 @@ public class Spawn : MonoBehaviour {
 	bool randchance(float c){return Random.value < c;}
 	int randsign(){return randchance(.5f) ? -1 : 1;}
 
-    public float timeTilStart = 2f;
+    public static float timeTilStart = 4f;
 
     public GameObject[] Enemies;
 	public float[] SpawnChancePerSecond;
@@ -23,7 +23,13 @@ public class Spawn : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update(){
+    void Update()
+    {
+        if (timeTilStart > 0)
+        {
+            timeTilStart -= Time.deltaTime;
+            return;
+        }
 		if(TotalEnemies <= 0) return;
 		SpawnRateMultiplier *= Mathf.Pow(1.02f,Time.deltaTime);
 		for(int i = 0; i < Enemies.Length; i++){
@@ -34,7 +40,8 @@ public class Spawn : MonoBehaviour {
 		}
 	}
 
-	void SpawnEnemy(int index){
+    void SpawnEnemy(int index)
+    {
 		GameObject obj = Instantiate(Enemies[index]) as GameObject;
 		obj.rigidbody2D.AddForce(new Vector2(symmrand(300),rand(-100,-10)));
 		if(--TotalEnemies <= 0){

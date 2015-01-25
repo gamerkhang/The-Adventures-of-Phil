@@ -3,22 +3,24 @@ using System.Collections;
 
 public class NextLevel : MonoBehaviour {
     public string nextLevel;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    //public float speed = 10f;
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
         {
             Application.LoadLevel(nextLevel);
+            //StartCoroutine("LoadNextLevel");
         }
     }
+
+    //IEnumerator LoadNextLevel()
+    //{
+    //    while(guiTexture.color.a < 0.95f)
+    //    {
+    //        guiTexture.color = Color.Lerp(guiTexture.color, Color.black, speed * Time.deltaTime);
+    //        yield return null;
+    //    }
+    //    Application.LoadLevel(nextLevel);
+    //}
 }

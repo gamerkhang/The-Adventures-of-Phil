@@ -6,6 +6,7 @@ public class Mosquito : MonoBehaviour {
 	const float BACKUPSPEED = 2;
 	const float CHARGESPEED = 10;
 	const float CHARGE = 1.5f;
+    GameObject player;
 	
 	float symmrand(float v){return (Random.value-.5f)*v*2;}
 	float rand(float a,float b){return a+Random.value*(b-a);}
@@ -41,6 +42,7 @@ public class Mosquito : MonoBehaviour {
 	bool Charging;
 	float chargecooldown;
 	void Start(){
+        player = (GameObject)GameObject.FindWithTag("Player");
 		chargecooldown = rand(1,4)+rand(1,4)+rand(1,4);
 		Charging = false;
 		gravitymod = rand(.75f,.85f);
@@ -60,7 +62,7 @@ public class Mosquito : MonoBehaviour {
 	}
 
 	Vector2 GetPlayerPosition(){
-		return ((GameObject)GameObject.FindWithTag("Player")).transform.position;
+		return (player).transform.position;
 	}
 
 	Vector3 ChargeToward;
@@ -89,7 +91,7 @@ public class Mosquito : MonoBehaviour {
 		
 		rigidbody2D.angularVelocity *= .95f;
 
-		if(Charging){
+		if(Charging && player != null){
 			Update_Charging();
 			return;
 		}
