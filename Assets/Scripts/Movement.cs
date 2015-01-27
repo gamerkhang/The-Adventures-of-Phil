@@ -5,11 +5,15 @@ public class Movement : MonoBehaviour {
     Vector3 curPos;
     Vector3 mousePos;
     Vector3 rotation;
-    public float speed = 6f;
+    public float speed;
     float zPos;
 	// Use this for initialization
 	void Start () {
         zPos = transform.position.z;
+        if (PlayerPrefs.GetString("Speed") == "T")
+            speed *= 2;
+        else
+            speed = 5.53f;
 	}
 	
 	// Update is called once per frame

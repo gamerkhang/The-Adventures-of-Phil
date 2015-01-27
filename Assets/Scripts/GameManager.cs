@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
 	public static int lives;
 	public static float currentTime, prevTime, startTime;
     public static bool beenHit = false;
+    public static bool oneUp = false;
 
 	GameObject pauseMenu, gameOverMenu;
 
@@ -19,9 +20,18 @@ public class GameManager : MonoBehaviour {
     GameObject playerSprite;
 
 	// Use this for initialization
-	void Start () {
-		lives = 6;
-        prevLives = lives;
+    void Start()
+    {
+        //PlayerPrefs.SetString("1UP", "T");
+        //if (PlayerPrefs.GetString("1UP") == "T")
+        //{
+        //    lives = 8;
+        //    prevLives = lives;
+        //}
+        //else
+        //{
+            lives = 6;
+            prevLives = lives;
 		pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
 		gameOverMenu = GameObject.FindGameObjectWithTag("GameOverMenu");
 		pauseMenu.SetActive(false);
@@ -43,11 +53,12 @@ public class GameManager : MonoBehaviour {
         }
 
         StartCoroutine("IncreaseScore");
+        //oneUp = true;
 	}
 
-	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
         if (beenHit)
         {
             GameManager.lives -= 1;

@@ -5,9 +5,19 @@ public class Hearts : MonoBehaviour {
     int prevLives;
     int heartsIndex;
     public AudioClip rip;
-	// Use this for initialization
-	void Start () 
+	void Start ()
     {
+        //PlayerPrefs.SetString("1UP","T");
+        //if (PlayerPrefs.GetString("1UP") == "T")
+        //{
+        //    GameObject temp1 = new GameObject();
+        //    GameObject temp2 = new GameObject();
+
+        //    temp1 = Instantiate(transform.GetChild(0), new Vector2(-7.02f, 3.67f), Quaternion.identity) as GameObject;
+        //    temp2 = Instantiate(transform.GetChild(1), new Vector2(-7.02f, 3.67f), Quaternion.identity) as GameObject;
+        //    temp1.transform.parent = gameObject.transform.parent;
+        //    //transform; //temp2.transform.parent = 
+        //}
         heartsIndex = transform.childCount;
         prevLives = GameManager.lives;
 	}
@@ -15,7 +25,7 @@ public class Hearts : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (prevLives > GameManager.lives) // && (!GameManager.gameOver && GameManager.gameRunning)
+        if (prevLives > GameManager.lives)
         {
             heartsIndex--;
             if (heartsIndex >= 0)
