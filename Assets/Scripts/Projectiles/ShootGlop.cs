@@ -32,7 +32,7 @@ public class ShootGlop : MonoBehaviour {
         {
             if (cooldown > 0)
                 cooldown -= Time.deltaTime;
-            else if (Input.GetButtonDown("Fire1"))
+            else if (Input.GetButton("Fire1"))
                 FireGlop();
         }
 	}
