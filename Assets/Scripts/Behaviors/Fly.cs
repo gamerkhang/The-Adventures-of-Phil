@@ -21,8 +21,6 @@ public class Fly : MonoBehaviour {
 	}
 
 	void Update(){
-		if (gameObject.GetComponent<KillEnemy>().enemyAlive == false)
-			enabled = false;
 		if(canfly){
 			rigidbody2D.AddRelativeForce(new Vector2(flyspeed*Time.deltaTime,0));
 			flyspeed *= .975f;
