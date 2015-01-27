@@ -46,6 +46,8 @@ public class Spawn : MonoBehaviour {
 		obj.rigidbody2D.AddForce(new Vector2(symmrand(300),rand(-100,-10)));
 		if(--TotalEnemies <= 0){
 			GameManager.gameOver = true;
+			AudioSource audio = gameObject.GetComponent<AudioSource>();
+			audio.Play ();
 			nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
 		}
 	}

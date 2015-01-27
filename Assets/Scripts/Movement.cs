@@ -25,6 +25,9 @@ public class Movement : MonoBehaviour {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = zPos;
         rotation = (mousePos - curPos).normalized;
-        rigidbody2D.velocity = rotation * speed;
+		if((transform.position-mousePos).magnitude < .15f)
+			transform.position = mousePos;
+		else
+        	rigidbody2D.velocity = rotation * speed;
     }
 }

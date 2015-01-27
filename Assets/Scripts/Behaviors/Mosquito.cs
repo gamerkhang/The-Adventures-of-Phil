@@ -85,6 +85,8 @@ public class Mosquito : MonoBehaviour {
 	}
 	
 	void Update(){
+		if (gameObject.GetComponent<KillEnemy>().enemyAlive == false)
+			enabled = false;
 		if(turncooldown > 0)
 			turncooldown -= Time.deltaTime;
 		rigidbody2D.gravityScale *= gravitymod;//Mathf.Pow(gravitymultpersecond,Time.deltaTime);

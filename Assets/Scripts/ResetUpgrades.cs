@@ -10,4 +10,12 @@ public class ResetUpgrades : MonoBehaviour {
         PlayerPrefs.SetString("1UP", "F");
         PlayerPrefs.SetString("Speed", "F");
 	}
+    void Update()
+    {
+        PlayerPrefs.SetString("Multi", "F");
+        PlayerPrefs.SetString("Spit", "F");
+        PlayerPrefs.SetString("1UP", "F");
+        PlayerPrefs.SetString("Speed", "F");
+
+    }
 }

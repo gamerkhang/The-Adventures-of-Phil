@@ -11,6 +11,7 @@ public class FadeIn : MonoBehaviour {
 
     void Awake()
     {
+        GetComponent<GUITexture>().enabled = true;
         guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
     }
 	void Update () 

@@ -16,7 +16,8 @@ public class ShootGlop : MonoBehaviour {
     {
         if (PlayerPrefs.GetString("Spit") == "T")
             cDown /= 2;
-        else { }
+        else
+            cDown = 1f;
         if (PlayerPrefs.GetString("Multi") == "T")
             multi = true;
         else
@@ -26,6 +27,14 @@ public class ShootGlop : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
+        if (PlayerPrefs.GetString("Spit") == "T")
+            cDown /= 2;
+        else
+            cDown = 1f;
+        if (PlayerPrefs.GetString("Multi") == "T")
+            multi = true;
+        else
+            multi = false;
         glopList = new List<GameObject>();
 	}
 	
@@ -45,19 +54,20 @@ public class ShootGlop : MonoBehaviour {
     void FireGlop()
     {
         cooldown = cDown;
-        if (!multi)
+        if (multi)
+        {
+            GameObject temp = Instantiate(glop, transform.position + Vector3.up / 4, glop.transform.rotation) as GameObject;
+            GameObject temp2 = Instantiate(glop, transform.position - Vector3.right / 2 + Vector3.up / 4, glop.transform.rotation * Quaternion.Euler(0, 0, 45)) as GameObject;
+            GameObject temp3 = Instantiate(glop, transform.position + Vector3.right / 2 + Vector3.up / 4, glop.transform.rotation * Quaternion.Euler(0, 0, -45)) as GameObject;
+            temp.rigidbody2D.velocity = new Vector2(0, 1) * glopSpeed;
+            temp2.rigidbody2D.velocity = new Vector2(-0.10f, 1) * glopSpeed;
+            temp3.rigidbody2D.velocity = new Vector2(0.10f, 1) * glopSpeed;
+            glopList.Add(temp);
+        } 
+        else
         {
             GameObject temp = Instantiate(glop, transform.position, glop.transform.rotation) as GameObject;
             temp.rigidbody2D.velocity = Vector3.up * glopSpeed;
-            glopList.Add(temp);
-        } else
-        {
-            GameObject temp = Instantiate(glop, transform.position + Vector3.up / 4, glop.transform.rotation) as GameObject;
-            GameObject temp2 = Instantiate(glop, transform.position - Vector3.right/2 + Vector3.up/4, glop.transform.rotation * Quaternion.Euler(0,0,45)) as GameObject;
-            GameObject temp3 = Instantiate(glop, transform.position + Vector3.right/2 + Vector3.up/4, glop.transform.rotation * Quaternion.Euler(0, 0, -45)) as GameObject;
-            temp.rigidbody2D.velocity = new Vector2(0,1) * glopSpeed;
-            temp2.rigidbody2D.velocity = new Vector2(-0.10f,1) * glopSpeed;
-            temp3.rigidbody2D.velocity = new Vector2(0.10f,1) * glopSpeed;
             glopList.Add(temp);
         }
         audio.PlayOneShot(spit);
