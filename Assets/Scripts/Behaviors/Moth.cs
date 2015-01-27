@@ -19,6 +19,8 @@ public class Moth : MonoBehaviour {
 	}
 
 	void Update(){
+		if (gameObject.GetComponent<KillEnemy>().enemyAlive == false)
+			enabled = false;
 		movementnormal = (movementnormal+new Vector2(symmrand(MOVEMENTRAND),symmrand(MOVEMENTRAND))).normalized;
 		rigidbody2D.angularVelocity = 0;
 		transform.localScale = new Vector3(sizex*(movementnormal.x > 0 ? 1 : -1),transform.localScale.y,0);

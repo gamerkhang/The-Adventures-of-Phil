@@ -3,12 +3,12 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 	public static bool gameRunning;
-	public static bool gameOver;
+    public static bool gameOver;
+    public static bool gameOverScreen;
 	public static string minutes, seconds;
 	public static int lives;
 	public static float currentTime, prevTime, startTime;
     public static bool beenHit = false;
-    public static bool oneUp = false;
 
 	GameObject pauseMenu, gameOverMenu;
 
@@ -19,30 +19,30 @@ public class GameManager : MonoBehaviour {
     GameObject playerCollider;
     GameObject playerSprite;
 
-	// Use this for initialization
-    void Start()
+    void Awake()
     {
-        //PlayerPrefs.SetString("1UP", "T");
-        //if (PlayerPrefs.GetString("1UP") == "T")
-        //{
-        //    lives = 8;
-        //    prevLives = lives;
-        //}
-        //else
-        //{
-            lives = 6;
-            prevLives = lives;
+        if (Application.loadedLevelName == "Intro")
+            SaveValue.time = 0f;
+    }
+
+	// Use this for initialization
+	void Start () {
+		lives = 6;
+        prevLives = lives;
 		pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
 		gameOverMenu = GameObject.FindGameObjectWithTag("GameOverMenu");
 		pauseMenu.SetActive(false);
 		gameOverMenu.SetActive(false);
         gameRunning = true;
         gameOver = false;
-        ApplicationModel.score = 0;
+        gameOverScreen = false;
+        //Score.score = 0;
 		startTime = Time.time;
         currentTime = startTime;
 
-        player = GameObject.FindWithTag("Player");
+		player = GameObject.FindWithTag("Player");
+		player.GetComponent<Movement>().enabled = true;
+		player.rigidbody2D.gravityScale = 0;
 
         foreach (Transform t in player.transform)
         {
@@ -53,53 +53,49 @@ public class GameManager : MonoBehaviour {
         }
 
         StartCoroutine("IncreaseScore");
-        //oneUp = true;
 	}
 
+	
 	// Update is called once per frame
-    void Update()
-    {
+	void Update () {
         if (beenHit)
         {
             GameManager.lives -= 1;
             beenHit = false;
         }
-        if (prevLives > lives)
-        {
-            Debug.Log("Lives: " + lives);
+        if (prevLives > lives && lives > 0)
             StartCoroutine("Invincibility");
-        }
 
         if (!gameOver)
         {
             prevTime = currentTime;
             currentTime = Time.time;
         }
-//		ApplicationModel.score += (int)((currentTime - prevTime) * 10000 * Time.deltaTime);
 
 		if (Input.GetButtonDown("Pause"))
 			Pause();
-        else if (lives <= 0 && gameOver == false)
+        else if (lives <= 0 && gameOverScreen == false)
         {
-            Destroy(GameObject.FindWithTag("Player"));
+			player.GetComponent<Movement>().enabled = false;
+			player.rigidbody2D.gravityScale = 1;
             GameOver();
         }
 
         prevLives = lives;
 	}
 
-    //void FixedUpdate()
-    //{
-
-    //    ApplicationModel.score += (int)((currentTime - prevTime) * 100);
-    //}
+    void OnDestroy()
+    {
+        if (!gameOverScreen)
+            UpdatePlayTime();
+    }
 
     IEnumerator IncreaseScore()
     {
         yield return new WaitForSeconds(Spawn.timeTilStart);
         while(!gameOver)
         {
-            ApplicationModel.score += 50;
+            SaveValue.score += 50;
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -117,12 +113,21 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		gameOver = true;
-		float timer = currentTime - startTime;
-		minutes = Mathf.Floor(timer / 60).ToString("00");
-		seconds = Mathf.Floor(timer % 60).ToString("00");
+		gameOverScreen = true;
+        UpdatePlayTime();
+        SaveValue.time = 0f;
 		gameOverMenu.SetActive(true);
 	}
+
+    void UpdatePlayTime()
+    {
+        float timer;
+        timer = SaveValue.time;
+        timer += currentTime - startTime;
+        SaveValue.time = timer;
+        minutes = Mathf.Floor(timer / 60).ToString("00");
+        seconds = Mathf.Floor(timer % 60).ToString("00");
+    }
 
     IEnumerator Invincibility()
     {

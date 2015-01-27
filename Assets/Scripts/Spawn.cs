@@ -16,13 +16,11 @@ public class Spawn : MonoBehaviour {
 
     GameObject nextLevel;
 
-	// Use this for initialization
 	float SpawnRateMultiplier = 1;
 	void Start(){
         nextLevel = GameObject.FindWithTag("NextLevel");
 	}
 	
-	// Update is called once per frame
     void Update()
     {
         if (timeTilStart > 0)
@@ -33,7 +31,7 @@ public class Spawn : MonoBehaviour {
 		if(TotalEnemies <= 0) return;
 		SpawnRateMultiplier *= Mathf.Pow(1.02f,Time.deltaTime);
 		for(int i = 0; i < Enemies.Length; i++){
-			if(randchance(SpawnChancePerSecond[i])){//Mathf.Pow(SpawnChancePerSecond[i],Time.deltaTime))){
+			if(randchance(SpawnChancePerSecond[i])){
 				SpawnEnemy(i);
 				break;
 			}
@@ -46,6 +44,8 @@ public class Spawn : MonoBehaviour {
 		obj.rigidbody2D.AddForce(new Vector2(symmrand(300),rand(-100,-10)));
 		if(--TotalEnemies <= 0){
 			GameManager.gameOver = true;
+			//AudioSource audio = gameObject.GetComponent<AudioSource>();
+			audio.Play ();
 			nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
 		}
 	}
