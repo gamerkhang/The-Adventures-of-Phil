@@ -41,8 +41,11 @@ public class GameManager : MonoBehaviour {
         currentTime = startTime;
 
 		player = GameObject.FindWithTag("Player");
-		player.GetComponent<Movement>().enabled = true;
-		player.rigidbody2D.gravityScale = 0;
+        if (player != null)
+        {
+            player.GetComponent<Movement>().enabled = true;
+            player.rigidbody2D.gravityScale = 0;
+        }
 
         foreach (Transform t in player.transform)
         {
@@ -100,13 +103,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-	public void Pause() {
+    public void Pause()
+    {
 		Time.timeScale = 0;
 		gameRunning = false;
 		pauseMenu.SetActive(true);
 	}
 
-	public void Unpause () {
+	public void Unpause () 
+    {
+        //if (Application.loadedLevelName == "IntroText")
+        //    GameObject.Find("IntroText").GetComponent<CanvasRenderer>().active = true;
 		pauseMenu.SetActive(false);
 		Time.timeScale = 1;
 		gameRunning = true;
