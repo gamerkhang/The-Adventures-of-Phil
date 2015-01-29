@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour {
     Quaternion down;
     HashSet<string> levelsYFlip;
     string thisLevel;
+    public float deadzone = 0.15f;
+
     void Awake()
     {
         thisLevel = Application.loadedLevelName;
@@ -40,8 +42,8 @@ public class Movement : MonoBehaviour {
         mousePos.z = zPos;
         rotation = (mousePos - curPos).normalized;
         FlipY();
-        if ((transform.position - mousePos).magnitude < .15f)
-            transform.position = mousePos;
+        if ((transform.position - mousePos).magnitude < deadzone)
+            rigidbody2D.velocity = Vector2.zero;
         else
             rigidbody2D.velocity = rotation * speed;
     }
