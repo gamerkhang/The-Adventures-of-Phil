@@ -11,12 +11,23 @@ public class KillEnemy : MonoBehaviour
     {
         if (other.CompareTag("Projectile"))
         {
-            if(enemyAlive)
-                SaveValue.score += scoreIncrease;
-			gameObject.rigidbody2D.gravityScale = 2f;
+            if (enemyAlive)
+            {
+                gameObject.rigidbody2D.gravityScale = 2f;
+                GetComponent<SpriteRenderer>().color = new Color(166f/255f, 223f/255f, 105f/255f);
+                SavedValues.score += scoreIncrease;
+                InstantiatePointsClone();
+            }
             audio.PlayOneShot(spitHit);
 			enemyAlive = false;
-            audio.PlayOneShot(spitHit);
         }
+    }
+
+    void InstantiatePointsClone()
+    {
+        GameObject pointsClone = new GameObject();
+        pointsClone = (GameObject)Resources.Load("pointsget", typeof(GameObject));
+        pointsClone.GetComponent<PointsClone>().pointValue = scoreIncrease;
+        Instantiate(pointsClone, transform.position, Quaternion.identity);
     }
 }

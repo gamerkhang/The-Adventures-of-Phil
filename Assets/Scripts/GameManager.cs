@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         if (Application.loadedLevelName == "Intro")
-            SaveValue.time = 0f;
+            SavedValues.time = 0f;
     }
 
 	// Use this for initialization
@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour {
         gameRunning = true;
         gameOver = false;
         gameOverScreen = false;
-        //Score.score = 0;
 		startTime = Time.time;
         currentTime = startTime;
 
@@ -54,8 +53,6 @@ public class GameManager : MonoBehaviour {
             else if (t.name == "PhilSprite")
                 playerSprite = t.gameObject;
         }
-
-        StartCoroutine("IncreaseScore");
 	}
 
 	
@@ -95,10 +92,10 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator IncreaseScore()
     {
-        yield return new WaitForSeconds(Spawn.timeTilStart);
+        yield return new WaitForSeconds(1f); //Spawn.timeTilStart
         while(!gameOver)
         {
-            SaveValue.score += 50;
+            SavedValues.score += 50;
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -122,16 +119,16 @@ public class GameManager : MonoBehaviour {
 	public void GameOver() {
 		gameOverScreen = true;
         UpdatePlayTime();
-        SaveValue.time = 0f;
+        SavedValues.time = 0f;
 		gameOverMenu.SetActive(true);
 	}
 
     void UpdatePlayTime()
     {
         float timer;
-        timer = SaveValue.time;
+        timer = SavedValues.time;
         timer += currentTime - startTime;
-        SaveValue.time = timer;
+        SavedValues.time = timer;
         minutes = Mathf.Floor(timer / 60).ToString("00");
         seconds = Mathf.Floor(timer % 60).ToString("00");
     }

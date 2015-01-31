@@ -23,7 +23,7 @@ public class SetUpgradesCostText : MonoBehaviour {
         if (upgrade == "SpeedBoost")
             costDisplayed = parentUpgrade.speedCost.ToString();
         if (upgrade == "ExtraHeart")
-            costDisplayed = parentUpgrade.oneUpCost.ToString();
+            costDisplayed = "Broken"; //parentUpgrade.oneUpCost.ToString();
 
         GetComponent<Text>().text = costDisplayed;
     }

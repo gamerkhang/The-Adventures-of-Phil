@@ -26,10 +26,11 @@ public class Movement : MonoBehaviour {
         down = new Quaternion(0f, 0f, 180f, 0f);
     }
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         zPos = transform.position.z;
         float origSpeed = speed;
-        if (SaveValue.speed == true)
+        if (SavedValues.speed == true)
             speed *= 2;
         else
             speed = origSpeed;
@@ -38,7 +39,15 @@ public class Movement : MonoBehaviour {
     void FixedUpdate()
     {
         curPos = transform.position;
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (SavedValues.mobile && Input.touchCount > 0)
+        {
+            mousePos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            mousePos.y += 1.5f;
+        }
+        else if (SavedValues.mobile)
+            mousePos = transform.position;
+        else
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = zPos;
         rotation = (mousePos - curPos).normalized;
         FlipY();

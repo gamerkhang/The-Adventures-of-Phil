@@ -37,26 +37,26 @@ public class SelectUpgrade : MonoBehaviour {
             case "MultiShot":
                 if (!CanAfford(multiCost))
                     return false;
-                SaveValue.multi = true;
-                SaveValue.score -= multiCost;
+                SavedValues.multi = true;
+                SavedValues.score -= multiCost;
                 return true;
             case "SpitFaster":
                 if (!CanAfford(spitCost))
                     return false;
-                SaveValue.spit = true;
-                SaveValue.score -= spitCost;
+                SavedValues.spit = true;
+                SavedValues.score -= spitCost;
                 return true;
             case "ExtraHeart":
                 if (!CanAfford(oneUpCost))
                     return false;
-                SaveValue.oneUp = true;
-                SaveValue.score -= oneUpCost;
+                SavedValues.oneUp = true;
+                SavedValues.score -= oneUpCost;
                 return true;
             case "SpeedBoost":
                 if (!CanAfford(speedCost))
                     return false;
-                SaveValue.speed = true;
-                SaveValue.score -= speedCost;
+                SavedValues.speed = true;
+                SavedValues.score -= speedCost;
                 return true;
         }
         return false;
@@ -64,6 +64,6 @@ public class SelectUpgrade : MonoBehaviour {
 
     bool CanAfford(int value)
     {
-        return SaveValue.score > value;
+        return SavedValues.score > value;
     }
 }

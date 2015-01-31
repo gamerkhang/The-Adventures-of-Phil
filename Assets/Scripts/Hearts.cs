@@ -5,6 +5,8 @@ public class Hearts : MonoBehaviour {
     int prevLives;
     int heartsIndex;
     public AudioClip rip;
+    public int scoreDecrease = -500;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -22,8 +24,18 @@ public class Hearts : MonoBehaviour {
                 Transform heartAtIndex = transform.GetChild(heartsIndex);
 				heartAtIndex.gameObject.SetActive(false);
 				audio.PlayOneShot(rip);
+                SavedValues.score += scoreDecrease;
+
+                InstantiatePointsClone(heartAtIndex.position);
             }
         }
         prevLives = GameManager.lives;
 	}
+
+    void InstantiatePointsClone(Vector3 pos)
+    {
+        GameObject pointsClone = (GameObject)Resources.Load("pointsget", typeof(GameObject));
+        pointsClone.GetComponent<PointsClone>().pointValue = scoreDecrease;
+        Instantiate(pointsClone, pos, Quaternion.identity);
+    }
 }

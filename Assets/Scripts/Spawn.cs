@@ -7,8 +7,6 @@ public class Spawn : MonoBehaviour {
 	bool randchance(float c){return Random.value < c;}
 	int randsign(){return randchance(.5f) ? -1 : 1;}
 
-    public static float timeTilStart = 4f;
-
     public GameObject[] Enemies;
 	public float[] SpawnChancePerSecond;
 
@@ -23,11 +21,7 @@ public class Spawn : MonoBehaviour {
 	
     void Update()
     {
-        if (timeTilStart > 0)
-        {
-            timeTilStart -= Time.deltaTime;
-            return;
-        }
+        if (GameObject.Find("ScreenShaker") != null) return;
 		if(TotalEnemies <= 0) return;
 		SpawnRateMultiplier *= Mathf.Pow(1.02f,Time.deltaTime);
 		for(int i = 0; i < Enemies.Length; i++){
@@ -44,9 +38,9 @@ public class Spawn : MonoBehaviour {
 		obj.rigidbody2D.AddForce(new Vector2(symmrand(300),rand(-100,-10)));
 		if(--TotalEnemies <= 0){
 			GameManager.gameOver = true;
-			//AudioSource audio = gameObject.GetComponent<AudioSource>();
-			audio.Play ();
-			nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
+            audio.Play();
+            GetComponent<Screenshake>().enabled = true;
+            nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
 		}
 	}
 }

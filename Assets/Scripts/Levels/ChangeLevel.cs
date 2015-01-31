@@ -19,6 +19,20 @@ public class ChangeLevel : MonoBehaviour {
 		Application.LoadLevel (levelName);
 	}
 
+    public void MainMenu()
+    {
+        SavedValues.score = 0;
+        SavedValues.time = 0;
+        Application.LoadLevel(0);
+    }
+
+    public void RestartLevel()
+    {
+        SavedValues.score = 0;
+        SavedValues.time = 0;
+        Application.LoadLevel(Application.loadedLevelName);
+    }
+
 	public void Quit ()
 	{
 		Application.Quit();

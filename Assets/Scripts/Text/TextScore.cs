@@ -4,14 +4,18 @@ using System.Collections;
 
 public class TextScore : MonoBehaviour {
 	Text score;
+    bool inStomach = false;
 
 	void Start () {
+        if (Application.loadedLevelName != "Credits")
+            inStomach = true;
 		score = GetComponent<Text>();
+        score.text = SavedValues.score.ToString();
 	}
 	
 	void Update () {
-        if (!GameManager.gameOverScreen)
-		    score.text = "SCORE: " + SaveValue.score.ToString();
+        if (inStomach && !GameManager.gameOverScreen)
+		    score.text = "SCORE: " + SavedValues.score.ToString();
 	}
 
     //IEnumerator FadeToVisible()

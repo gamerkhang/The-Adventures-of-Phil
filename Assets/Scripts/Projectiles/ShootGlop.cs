@@ -6,22 +6,20 @@ public class ShootGlop : MonoBehaviour {
 
     public GameObject glop;
     public float glopSpeed = 5f;
-    //public static List<GameObject> glopList;
     public AudioClip spit;
     bool multi = false;
     public float cDown = 1f;
 
     void Start()
     {
-        if (SaveValue.spit)
+        if (SavedValues.spit)
             cDown /= 2;
         else
             cDown = 1f;
-        if (SaveValue.multi)
+        if (SavedValues.multi)
             multi = true;
         else
             multi = false;
-        //glopList = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -32,6 +30,8 @@ public class ShootGlop : MonoBehaviour {
         {
             if (cooldown > 0)
                 cooldown -= Time.deltaTime;
+            else if (SavedValues.mobile && Input.touchCount > 0) // && Input.GetTouch(0).phase == TouchPhase.Began
+                FireGlop();
             else if (Input.GetButton("Fire1"))
                 FireGlop();
         }
@@ -48,13 +48,11 @@ public class ShootGlop : MonoBehaviour {
             temp.rigidbody2D.velocity = new Vector2(0, 1) * glopSpeed;
             temp2.rigidbody2D.velocity = new Vector2(-0.10f, 1) * glopSpeed;
             temp3.rigidbody2D.velocity = new Vector2(0.10f, 1) * glopSpeed;
-            //glopList.Add(temp);
         } 
         else
         {
             GameObject temp = Instantiate(glop, transform.position, glop.transform.rotation) as GameObject;
             temp.rigidbody2D.velocity = Vector3.up * glopSpeed;
-            //glopList.Add(temp);
         }
         audio.PlayOneShot(spit);
     }
