@@ -3,9 +3,9 @@ using System.Collections;
 
 public class ResetHiscore : MonoBehaviour
 {
-
+    public int value = 10000;
     void Awake()
     {
-        PlayerPrefs.SetInt("HighScore", 10000);
+        PlayerPrefs.SetInt("HighScore", value);
     }
 }
