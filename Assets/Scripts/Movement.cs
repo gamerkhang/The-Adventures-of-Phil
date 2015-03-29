@@ -52,9 +52,9 @@ public class Movement : MonoBehaviour {
         rotation = (mousePos - curPos).normalized;
         FlipY();
         if ((transform.position - mousePos).magnitude < deadzone)
-            rigidbody2D.velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         else
-            rigidbody2D.velocity = rotation * speed;
+            GetComponent<Rigidbody2D>().velocity = rotation * speed;
     }
 
     void FlipY()

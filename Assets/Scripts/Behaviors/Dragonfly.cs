@@ -49,16 +49,16 @@ public class Dragonfly : MonoBehaviour {
 			enabled = false;
 		if(turncooldown > 0)
 			turncooldown -= Time.deltaTime;
-		rigidbody2D.gravityScale *= gravitymod;//Mathf.Pow(gravitymultpersecond,Time.deltaTime);
-		rigidbody2D.angularVelocity *= .98f;
+		GetComponent<Rigidbody2D>().gravityScale *= gravitymod;//Mathf.Pow(gravitymultpersecond,Time.deltaTime);
+		GetComponent<Rigidbody2D>().angularVelocity *= .98f;
 		transform.rotation = Quaternion.Euler(0,0,LerpAngle(transform.rotation.eulerAngles.z,0,.005f));
-		transform.localScale = new Vector3(sizex*(rigidbody2D.velocity.x > 0 ? 1 : -1),transform.localScale.y,0);
-		if(rigidbody2D.gravityScale < .1f || rigidbody2D.velocity.y > -1){
+		transform.localScale = new Vector3(sizex*(GetComponent<Rigidbody2D>().velocity.x > 0 ? 1 : -1),transform.localScale.y,0);
+		if(GetComponent<Rigidbody2D>().gravityScale < .1f || GetComponent<Rigidbody2D>().velocity.y > -1){
 			//if(rigidbody2D.velocity.y > -.5f)
-				rigidbody2D.velocity = new Vector2(horizontalflight,rigidbody2D.velocity.y*.9f);
+				GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalflight,GetComponent<Rigidbody2D>().velocity.y*.9f);
 			/*else
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,rigidbody2D.velocity.y*.9f);*/
 		}else
-			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,rigidbody2D.velocity.y*.9f);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,GetComponent<Rigidbody2D>().velocity.y*.9f);
 	}
 }

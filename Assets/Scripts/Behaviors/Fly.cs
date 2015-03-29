@@ -12,19 +12,19 @@ public class Fly : MonoBehaviour {
 		                                 
 	void Start(){
 		if(randchance(.25f)){
-			rigidbody2D.AddTorque(rand(25,50)*randsign());
+			GetComponent<Rigidbody2D>().AddTorque(rand(25,50)*randsign());
 			canfly = true;
 			flyspeed = rand(1750,2500);
-			rigidbody2D.gravityScale = .25f;
+			GetComponent<Rigidbody2D>().gravityScale = .25f;
 		}else
-			rigidbody2D.AddTorque(symmrand(50));
+			GetComponent<Rigidbody2D>().AddTorque(symmrand(50));
 	}
 
 	void Update(){
 		if (gameObject.GetComponent<KillEnemy>().enemyAlive == false)
 			enabled = false;
 		if(canfly){
-			rigidbody2D.AddRelativeForce(new Vector2(flyspeed*Time.deltaTime,0));
+			GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(flyspeed*Time.deltaTime,0));
 			flyspeed *= .975f;
 		}
 	}

@@ -23,8 +23,8 @@ public class Hearts : MonoBehaviour {
             {
                 Transform heartAtIndex = transform.GetChild(heartsIndex);
 				heartAtIndex.gameObject.SetActive(false);
-				audio.PlayOneShot(rip);
-                SavedValues.score += scoreDecrease;
+				GetComponent<AudioSource>().PlayOneShot(rip);
+                //SavedValues.score += scoreDecrease;
 
                 InstantiatePointsClone(heartAtIndex.position);
             }

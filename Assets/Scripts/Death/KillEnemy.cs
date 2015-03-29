@@ -13,12 +13,12 @@ public class KillEnemy : MonoBehaviour
         {
             if (enemyAlive)
             {
-                gameObject.rigidbody2D.gravityScale = 2f;
+                gameObject.GetComponent<Rigidbody2D>().gravityScale = 2f;
                 GetComponent<SpriteRenderer>().color = new Color(166f/255f, 223f/255f, 105f/255f);
                 SavedValues.score += scoreIncrease;
                 InstantiatePointsClone();
             }
-            audio.PlayOneShot(spitHit);
+            GetComponent<AudioSource>().PlayOneShot(spitHit);
 			enemyAlive = false;
         }
     }

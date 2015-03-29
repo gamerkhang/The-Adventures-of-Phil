@@ -73,10 +73,10 @@ public class Mosquito : MonoBehaviour {
 			//transform.rotation = Quaternion.Euler(0,0,ToAngle(targetpos-transform.position)*180/Mathf.PI*(Mathf.Sign(transform.localScale.x)));
 			if((ChargeTimer -= Time.deltaTime) <= 0)
 				ChargeToward = (Vector2)transform.position+diff*10000;
-			rigidbody2D.velocity = -diff*BACKUPSPEED;
+			GetComponent<Rigidbody2D>().velocity = -diff*BACKUPSPEED;
 		}else{
 			ChargeTimer -= Time.deltaTime;
-			rigidbody2D.velocity = (ChargeToward-transform.position).normalized*CHARGESPEED;
+			GetComponent<Rigidbody2D>().velocity = (ChargeToward-transform.position).normalized*CHARGESPEED;
 			if(ChargeTimer < -2){
 				chargecooldown = rand(1,3);
 				Charging = false;
@@ -89,9 +89,9 @@ public class Mosquito : MonoBehaviour {
 			enabled = false;
 		if(turncooldown > 0)
 			turncooldown -= Time.deltaTime;
-		rigidbody2D.gravityScale *= gravitymod;//Mathf.Pow(gravitymultpersecond,Time.deltaTime);
+		GetComponent<Rigidbody2D>().gravityScale *= gravitymod;//Mathf.Pow(gravitymultpersecond,Time.deltaTime);
 		
-		rigidbody2D.angularVelocity *= .95f;
+		GetComponent<Rigidbody2D>().angularVelocity *= .95f;
 
 		if(Charging && player != null){
 			Update_Charging();
@@ -104,10 +104,10 @@ public class Mosquito : MonoBehaviour {
 			ChargeTimer = CHARGE;
 			Charging = true;
 		}
-		FaceDir(rigidbody2D.velocity);
-		if(rigidbody2D.gravityScale < .1f || rigidbody2D.velocity.y > -1){
-			rigidbody2D.velocity = new Vector2(horizontalflight,rigidbody2D.velocity.y*.9f);
+		FaceDir(GetComponent<Rigidbody2D>().velocity);
+		if(GetComponent<Rigidbody2D>().gravityScale < .1f || GetComponent<Rigidbody2D>().velocity.y > -1){
+			GetComponent<Rigidbody2D>().velocity = new Vector2(horizontalflight,GetComponent<Rigidbody2D>().velocity.y*.9f);
 		}else
-			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,rigidbody2D.velocity.y*.9f);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x,GetComponent<Rigidbody2D>().velocity.y*.9f);
 	}
 }

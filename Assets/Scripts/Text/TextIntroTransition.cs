@@ -76,7 +76,7 @@ public class TextIntroTransition : MonoBehaviour {
 						currentCase += 1;
 						currentCharIndex = 0;
 						intro.text += "\n\n\n\t\t\t\t\t\t\t\t";
-                        audio.PlayOneShot(PhilTalk);
+                        GetComponent<AudioSource>().PlayOneShot(PhilTalk);
                         UpdateNextTime(transitionTime * 5);
                         textBox.GetComponent<SpriteRenderer>().enabled = true;
 					}

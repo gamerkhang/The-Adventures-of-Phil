@@ -22,9 +22,9 @@ public class Moth : MonoBehaviour {
 		if (gameObject.GetComponent<KillEnemy>().enemyAlive == false)
 			enabled = false;
 		movementnormal = (movementnormal+new Vector2(symmrand(MOVEMENTRAND),symmrand(MOVEMENTRAND))).normalized;
-		rigidbody2D.angularVelocity = 0;
+		GetComponent<Rigidbody2D>().angularVelocity = 0;
 		transform.localScale = new Vector3(sizex*(movementnormal.x > 0 ? 1 : -1),transform.localScale.y,0);
 		//rigidbody2D.AddForce(new Vector2(movementnormal.x*(FLYSPEED*Time.deltaTime),0));
-		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x+movementnormal.x*(FLYSPEED*Time.deltaTime),-2);
+		GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x+movementnormal.x*(FLYSPEED*Time.deltaTime),-2);
 	}
 }

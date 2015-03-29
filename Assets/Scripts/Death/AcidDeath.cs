@@ -17,7 +17,7 @@ public class AcidDeath : MonoBehaviour
     {
         if(other.CompareTag("Acid"))
         {
-            audio.PlayOneShot(splashSound);
+            GetComponent<AudioSource>().PlayOneShot(splashSound);
             GameObject temp = Instantiate(splash, new Vector2(transform.position.x, -4.122f), splashRotation) as GameObject; //splash.
             temp.SetActive(true);
             Destroy(temp, 0.5f);

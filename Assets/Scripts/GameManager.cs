@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
         if (player != null)
         {
             player.GetComponent<Movement>().enabled = true;
-            player.rigidbody2D.gravityScale = 0;
+            player.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
 
         foreach (Transform t in player.transform)
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour {
         else if (lives <= 0 && gameOverScreen == false)
         {
 			player.GetComponent<Movement>().enabled = false;
-			player.rigidbody2D.gravityScale = 1;
+			player.GetComponent<Rigidbody2D>().gravityScale = 1;
             GameOver();
         }
 

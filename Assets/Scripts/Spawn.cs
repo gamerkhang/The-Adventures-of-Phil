@@ -35,10 +35,10 @@ public class Spawn : MonoBehaviour {
     void SpawnEnemy(int index)
     {
 		GameObject obj = Instantiate(Enemies[index]) as GameObject;
-		obj.rigidbody2D.AddForce(new Vector2(symmrand(300),rand(-100,-10)));
+		obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(symmrand(300),rand(-100,-10)));
 		if(--TotalEnemies <= 0){
 			GameManager.gameOver = true;
-            audio.Play();
+            GetComponent<AudioSource>().Play();
             GetComponent<Screenshake>().enabled = true;
             nextLevel.GetComponent<EdgeCollider2D>().enabled = true;
 		}

@@ -35,7 +35,7 @@ public class IntroScene : MonoBehaviour {
             tongueTemp.transform.position += tongueSpeed*Vector3.up*Time.deltaTime; //Vector3.Lerp(tongueTemp.transform.position, player.transform.position, tongueSpeed * Time.deltaTime)
             yield return null;
         }
-        audio.PlayOneShot(ribbit);
+        GetComponent<AudioSource>().PlayOneShot(ribbit);
         player.transform.parent = tongueTemp.transform;
         GameObject.Find("Follow Camera").GetComponent<FollowPhil>().enabled = false;
         StartCoroutine("EndLevel");

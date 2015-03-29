@@ -45,15 +45,15 @@ public class ShootGlop : MonoBehaviour {
             GameObject temp = Instantiate(glop, transform.position + Vector3.up / 4, glop.transform.rotation) as GameObject;
             GameObject temp2 = Instantiate(glop, transform.position - Vector3.right / 2 + Vector3.up / 4, glop.transform.rotation * Quaternion.Euler(0, 0, 45)) as GameObject;
             GameObject temp3 = Instantiate(glop, transform.position + Vector3.right / 2 + Vector3.up / 4, glop.transform.rotation * Quaternion.Euler(0, 0, -45)) as GameObject;
-            temp.rigidbody2D.velocity = new Vector2(0, 1) * glopSpeed;
-            temp2.rigidbody2D.velocity = new Vector2(-0.10f, 1) * glopSpeed;
-            temp3.rigidbody2D.velocity = new Vector2(0.10f, 1) * glopSpeed;
+            temp.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1) * glopSpeed;
+            temp2.GetComponent<Rigidbody2D>().velocity = new Vector2(-0.10f, 1) * glopSpeed;
+            temp3.GetComponent<Rigidbody2D>().velocity = new Vector2(0.10f, 1) * glopSpeed;
         } 
         else
         {
             GameObject temp = Instantiate(glop, transform.position, glop.transform.rotation) as GameObject;
-            temp.rigidbody2D.velocity = Vector3.up * glopSpeed;
+            temp.GetComponent<Rigidbody2D>().velocity = Vector3.up * glopSpeed;
         }
-        audio.PlayOneShot(spit);
+        GetComponent<AudioSource>().PlayOneShot(spit);
     }
 }

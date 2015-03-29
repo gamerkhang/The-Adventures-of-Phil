@@ -10,7 +10,7 @@ public class FadeIn : MonoBehaviour {
     void Awake()
     {
         GetComponent<GUITexture>().enabled = true;
-        guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
+        GetComponent<GUITexture>().pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
     }
 	void Update () 
     {
@@ -19,17 +19,17 @@ public class FadeIn : MonoBehaviour {
 	}
 	void FadeToClear()
     {
-        guiTexture.color = Color.Lerp(guiTexture.color, Color.clear, speed * Time.deltaTime);
+        GetComponent<GUITexture>().color = Color.Lerp(GetComponent<GUITexture>().color, Color.clear, speed * Time.deltaTime);
     }
 
     void StartScene()
     {
         FadeToClear();
 
-        if(guiTexture.color.a <= 0.05f)
+        if(GetComponent<GUITexture>().color.a <= 0.05f)
         {
-            guiTexture.color = Color.clear;
-            guiTexture.enabled = false;
+            GetComponent<GUITexture>().color = Color.clear;
+            GetComponent<GUITexture>().enabled = false;
             sceneStarting = false;
         }
     }
