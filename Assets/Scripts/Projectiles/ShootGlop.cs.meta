@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: f5905a31b8f15b144a7c2bb1f78b2d9d
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - glop: {fileID: 100000, guid: 5af38a051eb306a4c81590a2f7389bcc, type: 2}
+  - spit: {fileID: 8300000, guid: 0fed3f7cad9350a47b064a91c2be612a, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

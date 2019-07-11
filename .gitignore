@@ -51,11 +51,7 @@ Temporary Items
 *.pidb
 *.unityproj
 .DS_Store
-/Library/FailedAssetImports.txt
-/Library/cache/
-/Library/previews/
-/Library/ScriptAssemblies
-/Library/metadata/
+/Library/*
 /obj
 /Temp
  
@@ -84,8 +80,3 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
-Assets/Sprites.meta
-*.meta
-Library/assetDatabase3
-Library/guidmapper
-Library/metadata
