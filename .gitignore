@@ -51,7 +51,7 @@ Temporary Items
 *.pidb
 *.unityproj
 .DS_Store
-/Library/*
+/Library
 /obj
 /Temp
  
